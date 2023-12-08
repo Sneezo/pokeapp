@@ -1,3 +1,4 @@
+"use server";
 import Card from "./Card";
 
 interface Pokemon {
@@ -18,7 +19,7 @@ const CardList = async ({ offset, limit }: Props) => {
   return (
     <div className="CardList grid grid-cols-3 grid-gap4 center place-content-evenly">
       {pokemonNames.map((p: Pokemon) => (
-        <Card name={p.name}></Card>
+        <Card key={p.name} name={p.name}></Card>
       ))}
     </div>
   );
