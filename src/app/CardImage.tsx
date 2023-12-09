@@ -19,15 +19,24 @@ const CardImage = ({ sprites, width, height }: Props) => {
     else setSpriteIndex(0);
   }
   return (
-    <div className="cardimage grid grid-cols-3">
+    <div className="cardimage grid grid-cols-3 place-content-evenly">
       <button onClick={() => previous()}>Prev</button>
       <Image
-        src={sprites[spriteIndex]}
-        alt={sprites[spriteIndex]}
+        src={sprites[spriteIndex].url}
+        alt={sprites[spriteIndex].name}
         width={width}
         height={height}
       ></Image>
       <button onClick={() => next()}>Next</button>
+      <h1></h1>
+      <h1 className="font-extrabold">
+        {sprites[spriteIndex].name
+          .toString()
+          .replace(
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/",
+            ""
+          )}
+      </h1>
     </div>
   );
 };

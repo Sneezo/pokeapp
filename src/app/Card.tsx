@@ -20,7 +20,7 @@ const Card = async ({ name }: Props) => {
   const rawPokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
   const pokemon = await rawPokemon.json();
   //state sprites in an array
-  const sprites = [];
+  let sprites = [];
   //Get list of forms
   const rawForms = await fetch(
     `https://pokeapi.co/api/v2/pokemon-form?offset=0&limit=1500`
@@ -56,15 +56,18 @@ const Card = async ({ name }: Props) => {
     async (obj: any) => await fetch(obj.url).then((res) => res.json())
   );
   const pFormImages = await Promise.all(pFormImageRequests);
-  pFormImages.map((obj) => sprites.push(obj.sprites.front_default));
-  sprites.push(pokemon.sprites.front_shiny);
-
+  pFormImages.map((obj) =>
+    sprites.push({ url: obj.sprites.front_default, name: obj.name })
+  );
+  sprites.push({ url: pokemon.sprites.front_shiny, name: `${name}-shiny` });
+  sprites = sprites.filter((s) => s.url != null);
+  sprites.forEach(
+    (sprite) =>
+      (sprite.name = sprite.name[0].toUpperCase() + sprite.name.slice(1))
+  );
   return (
     <div className="Card grid place-content-evenly text-center border-solid border-black border-2">
       <CardImage sprites={sprites} width={130} height={130}></CardImage>
-      <h1 className="font-extrabold">
-        {name[0].toUpperCase() + name.slice(1)}
-      </h1>
     </div>
   );
 };
