@@ -1,6 +1,5 @@
 import Image from "next/image";
 import CardImage from "./CardImage";
-import Par from "./Par";
 
 interface Props {
   name: string;

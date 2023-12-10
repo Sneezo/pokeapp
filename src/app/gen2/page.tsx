@@ -1,12 +1,21 @@
-import NavBar from "../NavBar";
-import CardList from "../CardList";
+"use client";
 
-const Gen1 = () => {
+import CardList from "../CardList";
+import NavBar from "../NavBar";
+
+interface Props {
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
+}
+
+export default function Home({ searchParams }: Props) {
+  const query = searchParams?.query || ``;
   return (
     <main>
       <NavBar></NavBar>
-      <CardList offset={151} limit={100}></CardList>
+      <CardList filter={query} offset={151} limit={100}></CardList>
     </main>
   );
-};
-export default Gen1;
+}

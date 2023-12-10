@@ -1,8 +1,9 @@
 import Link from "next/link";
+import Search from "./Search";
 
 export default function NavBar() {
   return (
-    <div className="">
+    <div className="bg-gray-200">
       <Link href={"/gen1"}>
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
           Gen 1
@@ -33,6 +34,7 @@ export default function NavBar() {
           All (beta)
         </button>
       </Link>
+      <Search placeholder="Search.."></Search>
     </div>
   );
 }
