@@ -1,5 +1,6 @@
 import { Suspense, useEffect, useState } from "react";
 import Card from "./Card";
+import TempCard from "./TempCard";
 
 interface Pokemon {
   name: string;
@@ -37,14 +38,11 @@ const CardList = async ({ offset, limit, searchParams, filter }: Props) => {
 
   return (
     <div className="CardList grid grid-cols-3 grid-gap4 center place-content-evenly">
-      <Suspense
-        key={"pokemoncardlist"}
-        fallback={<h1 className="animate-bounce">Loading..</h1>}
-      >
-        {pokemonNames.map((p: Pokemon) => (
+      {pokemonNames.map((p: Pokemon) => (
+        <Suspense key={p.name} fallback={<h1> Loading..</h1>}>
           <Card key={p.name} name={p.name}></Card>
-        ))}
-      </Suspense>
+        </Suspense>
+      ))}
     </div>
   );
 };
