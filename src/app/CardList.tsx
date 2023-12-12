@@ -30,7 +30,7 @@ const CardList = async ({ offset, limit, searchParams, filter }: Props) => {
     `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`
   );
   const res = await req.json();
-  const allPokemonNames = res.results;
+  const allPokemonNames = res.results.map((p)=> p.name.includes("-")?p.name.split("-")[0]:p.name);
   const pokemonNames = allPokemonNames.filter((p: Pokemon) =>
     p.name.includes(filter!)
   );
