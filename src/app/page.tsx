@@ -18,7 +18,7 @@ interface Props {
 export default function Home({ searchParams }: Props) {
   const query = searchParams?.query || ``;
   const [pokeNames, setPokeNames] = useState();
-  const [pokeForms, setPokeForms] = useState();
+  const [pokeForms, setPokeForms] = useState([]);
   useEffect(() => {
     async function getNames() {
       papa.parse(
@@ -39,7 +39,7 @@ export default function Home({ searchParams }: Props) {
           header: true,
           download: true,
           complete: (results: any) => {
-            const formsWithUrl = results.data.map((p) => ({
+            const formsWithUrl = results.data.map((p: any) => ({
               ...p,
               url: `https://raw.githubusercontent.com/PokeAPI/sprites/ca5a7886c10753144e6fae3b69d45a4d42a449b4/sprites/pokemon/${p.pokemon_id}.png`,
               shinyurl: `https://raw.githubusercontent.com/PokeAPI/sprites/ca5a7886c10753144e6fae3b69d45a4d42a449b4/sprites/pokemon/shiny/${p.pokemon_id}.png`,
@@ -56,15 +56,14 @@ export default function Home({ searchParams }: Props) {
 
   return (
     <div className="CardList grid grid-cols-3 grid-gap4 center place-content-evenly">
-      {pokeForms ? (
-        pokeForms.map((p) => (
-          <Suspense fallback={<p>{p.identifier}</p>}>
-            <Card2 Pokemon={p}></Card2>
-          </Suspense>
-        ))
-      ) : (
-        <p>nope</p>
-      )}
+      {pokeForms.map((p: any) => (
+        <Suspense
+          key={p.identifier}
+          fallback={<p key={p.identifier + p.id}>{p.identifier}</p>}
+        >
+          <Card2 Pokemon={p} key={p.identifier + p.id}></Card2>
+        </Suspense>
+      ))}
     </div>
   );
   /*   return (

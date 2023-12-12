@@ -17,6 +17,7 @@ const Card2 = ({ Pokemon }: Props) => {
       <div className="cardimage grid grid-cols-3 place-content-evenly">
         <button onClick={() => setShiny(!shiny)}>Prev</button>
         <Image
+          key={Pokemon.identifier}
           src={!shiny ? Pokemon.url : Pokemon.shinyurl}
           alt={Pokemon.identifier}
           width={130}
