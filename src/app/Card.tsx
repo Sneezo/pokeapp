@@ -32,6 +32,7 @@ const Card = async ({ name }: Props) => {
   //                                "url": "https://pokeapi.co/api/v2/pokemon-form/10182/"
   //                              }
   const pFormObjects = allForms.filter((obj: any) => obj.name.includes(`${name}-`));
+  pformObjects.push(allForms.filter((obj: any) => obj.name === {name}));
   // for each object in pFormObjects use the url property to fetch a new object on this form:
   /*   
     {
