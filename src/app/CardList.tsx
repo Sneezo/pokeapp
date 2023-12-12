@@ -37,14 +37,14 @@ const CardList = async ({ offset, limit, searchParams, filter }: Props) => {
 
   return (
     <div className="CardList grid grid-cols-3 grid-gap4 center place-content-evenly">
+      
+        {pokemonNames.map((p: Pokemon) => (
       <Suspense
         key={"pokemoncardlist"}
         fallback={<h1 className="animate-bounce">Loading..</h1>}
-      >
-        {pokemonNames.map((p: Pokemon) => (
-          <Card key={p.name} name={p.name}></Card>
+      ><Card key={p.name} name={p.name}></Card></Suspense>
         ))}
-      </Suspense>
+      
     </div>
   );
 };
