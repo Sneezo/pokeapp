@@ -32,7 +32,7 @@ const CardList = async ({ offset, limit, searchParams, filter }: Props) => {
   );
   const res = await req.json();
   const tempPokemonNames = res.results;
-  const allPokemonNames = tempPokemonNames.map((p) =>
+  const allPokemonNames = tempPokemonNames.map((p: any) =>
     p.name.includes("-") ? p.name.split("-")[0] : p.name
   );
   const pokemonNames = allPokemonNames.filter((p: Pokemon) =>
