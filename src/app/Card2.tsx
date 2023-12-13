@@ -17,13 +17,13 @@ const Card2 = ({ Pokemon }: Props) => {
     <div className="Card grid place-content-evenly text-center border-solid border-black border-2">
       <div className="cardimage grid grid-cols-3 place-content-evenly">
         <button onClick={() => setShiny(!shiny)}>Prev</button>
-        <Image
+        <img
           key={Pokemon.identifier}
           src={!shiny ? Pokemon.url : Pokemon.shinyurl}
           alt={Pokemon.identifier}
           width={130}
           height={130}
-        ></Image>
+        ></img>
         <button onClick={() => setShiny(!shiny)}>Next</button>
       </div>
       <h1 className="font-extrabold">{Pokemon.identifier}</h1>
